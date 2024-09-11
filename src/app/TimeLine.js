@@ -1,62 +1,48 @@
 'use client'
-import { Typography, Container, Box, Stack, Grid } from "@mui/material";
+import { Typography, Container, Box, Stack, Grid, ButtonBase } from "@mui/material";
+const setborderRadius = `border-radius: 27px 27px 27px 27px;
+                                            -moz-border-radius: 27px 27px 27px 27px;
+                                            -webkit-border-radius: 27px 27px 27px 27px;
+                                            border: 0px solid #000000;`;
 
-function TimeLine({isVisible}) {
-    return <Box position='fixed' 
+const makeTab = (isVisible, str) => {
+    return <ButtonBase key={str} sx={{borderRadius:setborderRadius}}>
+        <Grid container spacing={2} height='10vh' alignContent='space-around'>
+                <Grid item size={2}>
+                    <Box
+                        sx={{background:'black',
+                            height:'2vh',
+                            width: isVisible ? '15vh' : '5vh',
+                            transition:' width 0.5s',
+                            borderRadius:setborderRadius
+
+                    }}>.</Box>
+                </Grid>
+                <Grid item size={1}>
+                    <Box>
+                        <Typography>
+                            {str}
+                        </Typography>
+                    </Box>
+                </Grid>
+        </Grid>
+    </ButtonBase>
+}
+
+function TimeLine({isVisible1, isVisible2}) {
+    return <Box position='fixed' container
             sx={{
                 display:{xs:'none', sm:'none', md:'none', lg:'block'},
-                height:'50vh',
+                height:'10vh',
                 marginTop:14,
-                padding:5,
-                width: '65vh',
+                padding:3,
+                width: '40vh',
             }}>
         <Stack spacing={3}>
-            <Grid container spacing={2} key='1'>
-                <Grid item size={2}>
-                    <Box key='1'
-                        sx={{background:'black',
-                            height:'2vh',
-                            width: isVisible ? '30vh' : '20vh',
-                            transition:' width 1s',
-                            borderRadius:`border-radius: 27px 27px 27px 27px;
-                                        -moz-border-radius: 27px 27px 27px 27px;
-                                        -webkit-border-radius: 27px 27px 27px 27px;
-                                        border: 0px solid #000000;`
-
-                    }}>.</Box>
-                    {console.log(isVisible)}
-                </Grid>
-                <Grid item size={1}>
-                    <Box>
-                        Hello
-                    </Box>
-                </Grid>
-                
-            </Grid>
-
-            <Grid container spacing={2} key='2'>
-                <Grid item size={2}>
-                    <Box key='1'
-                        sx={{background:'black',
-                            height:'2vh',
-                            width:'10vh',
-                            borderRadius:`border-radius: 27px 27px 27px 27px;
-                                        -moz-border-radius: 27px 27px 27px 27px;
-                                        -webkit-border-radius: 27px 27px 27px 27px;
-                                        border: 0px solid #000000;`
-
-                    }}>.</Box>
-                </Grid>
-                <Grid item size={1}>
-                    <Box>
-                        Hello
-                    </Box>
-                </Grid>
-                
-                
-            </Grid>
-            
-            
+        {makeTab(isVisible1, 'About Me')}
+        {makeTab(!isVisible1 && !isVisible2, 'Experience')}
+        {makeTab(isVisible2, 'Leet Code')}
+        
             
         </Stack>
     </Box>

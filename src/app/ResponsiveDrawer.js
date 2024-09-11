@@ -15,30 +15,41 @@ import TimeLine from './TimeLine';
 
 
 export default function ResponsiveDrawer() {
-  const [isVisible, setIsVisible] = useState(false);
-  const targetRef = useRef();
+  const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+
+  const targetRef1 = useRef();
+  const targetRef2 = useRef();
+
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.4 } // Adjust threshold as needed
-    );
-
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
+    const makeObserver = (setIsVisible) => {
+      return new IntersectionObserver(
+        ([entry]) => {
+          setIsVisible(entry.isIntersecting);
+        },
+        { threshold: 0.28 } // Adjust threshold as needed
+      );
     }
-    if(isVisible) {
-      // do something
+    const observer1 = makeObserver(setIsVisible1);
+    const observer2 = makeObserver(setIsVisible2);
+
+    if(targetRef1.current) {
+      observer1.observe(targetRef1.current);
+    }
+    if(targetRef2.current) {
+      observer2.observe(targetRef2.current);
     }
 
     return () => {
-      if (observer && targetRef.current) {
-        observer.unobserve(targetRef.current);
+      if (observer1 && targetRef1.current) {
+        observer1.unobserve(targetRef1.current);
+      }
+      if (observer2 && targetRef2.current) {
+        observer2.unobserve(targetRef2.current);
       }
     };
-  }, [isVisible]);
+  }, [isVisible1, isVisible2]);
 
   const [isDrawOpen, setDrawOpen] = React.useState(false);
   const menuList = ['Home', 'Experience', 'LeetCode', 'About Me'];
@@ -68,7 +79,7 @@ export default function ResponsiveDrawer() {
 
   return (
     <Box>
-        <TimeLine isVisible={isVisible}/>
+        <TimeLine isVisible1={isVisible1} isVisible2={isVisible2}/>
         <CssBaseline />
         <Box sx={{position:'fixed',  
               background:'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,150,214,1) 0%, rgba(28,126,190,0.6418942577030813) 15%, rgba(0,212,255,0.6502976190476191) 90%);', 
@@ -100,7 +111,15 @@ export default function ResponsiveDrawer() {
               </Grid>
         </Box>
         <Box height='90px'/>
-        <Content triggerScroll={targetRef}/>
+        <Grid container alignContent='center'>
+          <GridItem xs={1} md={3}>
+            <Box></Box>
+          </GridItem>
+          <GridItem>
+            <Content triggerScroll={targetRef1} triggerScroll2={targetRef2}/>
+          </GridItem>
+        </Grid>
+        
         <Drawer open={isDrawOpen} onClose={toggleDrawer(false)} anchor='right' 
           PaperProps={{
             sx: {
@@ -109,7 +128,6 @@ export default function ResponsiveDrawer() {
           }}>
             {DrawerList}
         </Drawer>
-
     </Box>
   );
 }

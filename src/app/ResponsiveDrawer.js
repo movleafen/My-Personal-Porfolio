@@ -86,7 +86,7 @@ export default function ResponsiveDrawer() {
               width:'100%', 
               height:'90px',
             }}>
-              <Grid container direction="row" justifyContent="space-between" alignItems="baseline"> 
+              <Grid container='true' direction="row" justifyContent="space-between" alignItems="baseline"> 
                 <GridItem xs={4} marginLeft={3} padding={1}>
                   <Avatar alt="Haru" sx={{width:65, height:65}}> <Image priority={true} alt='Haru' width={65} src={myImage}/> </Avatar>   
                 </GridItem>
@@ -111,7 +111,7 @@ export default function ResponsiveDrawer() {
               </Grid>
         </Box>
         <Box height='90px'/>
-        <Grid container alignContent='center'>
+        <Grid container='true' alignContent='center'>
           <GridItem xs={1} md={3}>
             <Box></Box>
           </GridItem>

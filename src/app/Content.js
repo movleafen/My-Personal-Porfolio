@@ -99,22 +99,40 @@ function Content({triggerScroll, triggerScroll2}) {
                         <Chip label='MSSQL'/> 
                     </Stack>
                 </Grid>
-
-                <Grid key='2a1' id='experience box' container={true} spacing={2} justifyContent='space-evenly'>
-                    <Grid xs={4} justifySelf padding={0.5}>
+                <Divider/>
+                <Grid key='3a1' id='experience box' container justifyContent='space-evenly' maxWidth='90vh'>
+                    <Grid xs={3} justifySelf padding={0.5}>
                         2021 — PRESENT
                     </Grid>
                     <Grid xs={8}>
-                        <Typography variant='h5'>
-                            Freelance
+                        <Typography variant='h5' justifyContent='space-evenly' >
+                            Freelancing
                         </Typography>
-                        <Typography variant='h5'>
-                            SDDSSS
-                        </Typography>
+                        <Typography> Developed and maintained JCM Fuzion, a system providing cash management
+                        data for Slot Machines </Typography>
+                        <Typography>  Added new features for mobile usability and connectivity                        </Typography>
+                        <Typography> Designed databases and models </Typography>
+                        <Typography>  Built new pages for the Fuzion Mobile Section</Typography>
+                        <Typography> AddedAPIs for communication between the NFC reader and Fuzion </Typography>
+                        <Typography> Modified stored procedures to improve Fuzion performance </Typography>
+                        <Typography>  Communicated with customers (such as Hard Rock Casino) and created hotfix
+                        patches to resolve issues</Typography>
+                        <Typography>  Updated/restored daily database from active users on all test environments </Typography>
                         
                     </Grid>
-                    
+                    <Stack direction='row' useFlexGap spacing={1} sx={{flexWrap: 'wrap', padding:1 }}> 
+                        <Chip label='JS'/> 
+                        <Chip label='JQuery'/> 
+                        <Chip label='C#'/>
+                        <Chip label='.Net'/> 
+                        <Chip label='MVC 3.0'/> 
+                        <Chip label='ASP.Net'/>
+                        <Chip label='Entity Framework'/> 
+                        <Chip label='MSSQL'/> 
+                    </Stack>
                 </Grid>
+
+            
                 <Box key='2a2' id='experience box' maxWidth='80vh' >
                     
                     <Typography maxWidth='80vh' >

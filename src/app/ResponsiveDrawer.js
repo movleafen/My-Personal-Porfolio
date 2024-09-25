@@ -13,14 +13,15 @@ import DehazeOutlinedIcon from '@mui/icons-material/DehazeOutlined';
 import { Breadcrumbs, Typography, Link, Divider, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
 import TimeLine from './TimeLine';
 
-
 export default function ResponsiveDrawer() {
   const [isVisible1, setIsVisible1] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
-
+  
   const targetRef1 = useRef();
   const targetRef2 = useRef();
-
+  const leetcodeRef = useRef();
+  const experienceRef = useRef();
+ 
 
   useEffect(() => {
     const makeObserver = (setIsVisible) => {
@@ -79,7 +80,7 @@ export default function ResponsiveDrawer() {
 
   return (
     <Box>
-        <TimeLine isVisible1={isVisible1} isVisible2={isVisible2}/>
+        <TimeLine isVisible1={isVisible1} isVisible2={isVisible2} leetcodeRef={leetcodeRef}/>
         <CssBaseline />
         <Box sx={{position:'fixed',  
               background:'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,150,214,1) 0%, rgba(28,126,190,0.6418942577030813) 15%, rgba(0,212,255,0.6502976190476191) 90%);', 
@@ -116,7 +117,7 @@ export default function ResponsiveDrawer() {
             <Box></Box>
           </GridItem>
           <GridItem>
-            <Content triggerScroll={targetRef1} triggerScroll2={targetRef2}/>
+            <Content triggerScroll={targetRef1} triggerScroll2={targetRef2} leetcodeRef={leetcodeRef}/>
           </GridItem>
         </Grid>
         

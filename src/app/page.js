@@ -1,7 +1,6 @@
-import Image from "next/image";
-import { Container, Box, Typography } from '@mui/material';
+'use client'
+import { Container} from '@mui/material';
 import ResponsiveDrawer from "./ResponsiveDrawer";
-
 
 export default function Home() {
   return (

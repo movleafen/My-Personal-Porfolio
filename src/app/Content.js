@@ -9,7 +9,7 @@ import Grow from '@mui/material/Grow'
 import { Grid, Stack, Chip, Divider } from '@mui/material';
 import LeetCodeStats from './Leetcode';
 
-function Content({triggerScroll, triggerScroll2, leetcodeRef}) {
+function Content({triggerScroll, triggerScroll2, leetcodeRef, experienceRef}) {
     var firstMessage = ["My name is Mov Leafen"];
     var secondMessage = ["programmer", "problem solver", "self learner", "Corgi daddy"];
     
@@ -35,6 +35,27 @@ function Content({triggerScroll, triggerScroll2, leetcodeRef}) {
                     </Box>
                     
                 </Grow>
+                <Divider/>
+                <Grid key='0' id='experience box' container justifyContent='space-evenly' maxWidth='90vh' ref={experienceRef}>
+                    <Grid xs={3} justifySelf padding={0.5}>
+                        2017
+                    </Grid>
+                    <Grid xs={8}>
+                        <Typography variant='h5' justifyContent='space-evenly' >
+                            SlickDeals - Intern
+                        </Typography>
+                        <Typography> Built 5 pipelines on Apachi Airflow</Typography>
+                        <Typography> Developed custom styles and themes on vBullet 3</Typography>
+                        <Typography> Make good coffee </Typography>
+                    </Grid>
+                    <Stack direction='row' useFlexGap spacing={1} sx={{flexWrap: 'wrap', padding:1 }}> 
+                        <Chip label='Java'/> 
+                        <Chip label='JS'/> 
+                        <Chip label='PHP'/>
+                        <Chip label='BASH'/> 
+                    </Stack>
+                   
+                </Grid>
                 <Divider/>
                 <Grid key='1' id='experience box' container justifyContent='space-evenly' maxWidth='90vh'>
                     <Grid xs={3} justifySelf padding={0.5}>

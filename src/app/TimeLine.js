@@ -5,7 +5,7 @@ const setborderRadius = `border-radius: 27px 27px 27px 27px;
                                             -webkit-border-radius: 27px 27px 27px 27px;
                                             border: 0px solid #000000;`;
 
-const makeTab = (isVisible, str, scrollTo, ref) => {
+const makeTab = (isVisible, str, scrollTo) => {
     return <ButtonBase key={str} sx={{borderRadius:setborderRadius, width:'40vh'}} onClick={scrollTo}>
         <Grid container='true' spacing={2} height='10vh' alignContent='space-around'>
                 <Grid item size={2}>
@@ -29,18 +29,7 @@ const makeTab = (isVisible, str, scrollTo, ref) => {
     </ButtonBase>
 }
 
-function TimeLine({isVisible1, isVisible2, leetcodeRef, experienceRef}) {
-
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    };
-    const scrollTo = (ref) => {
-        console.log(ref)
-        
-    }
+function TimeLine({isVisible1, isVisible2, scrollToTop, scrollToExperience, scrollToLeetCode}) {
 
     return <Box position='fixed' container='true'
             sx={{
@@ -52,10 +41,9 @@ function TimeLine({isVisible1, isVisible2, leetcodeRef, experienceRef}) {
             }}>
         <Stack spacing={3}>
         {makeTab(isVisible1, 'About Me', scrollToTop)}
-        {makeTab(!isVisible1 && !isVisible2, 'Experience')}
-        {makeTab(isVisible2, 'Leet Code', scrollTo)}
+        {makeTab(!isVisible1 && !isVisible2, 'Experience', scrollToExperience)}
+        {makeTab(isVisible2, 'Leet Code', scrollToLeetCode)}
         
-            
         </Stack>
     </Box>
 }

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
 
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,15 +13,28 @@ import DehazeOutlinedIcon from '@mui/icons-material/DehazeOutlined';
 import { Breadcrumbs, Typography, Link, Divider, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
 import TimeLine from './TimeLine';
 
+
 export default function ResponsiveDrawer() {
   const [isVisible1, setIsVisible1] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
-  
   const targetRef1 = useRef();
   const targetRef2 = useRef();
-  const leetcodeRef = useRef();
-  const experienceRef = useRef();
- 
+  const leetcodeRef = useRef(null);
+  const experienceRef = useRef(null);
+  
+
+  const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+  };
+  const scrollToLeetCode = () => {
+      leetcodeRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+  const scrollToExperience = () => {
+      experienceRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
 
   useEffect(() => {
     const makeObserver = (setIsVisible) => {
@@ -41,7 +54,6 @@ export default function ResponsiveDrawer() {
     if(targetRef2.current) {
       observer2.observe(targetRef2.current);
     }
-
     return () => {
       if (observer1 && targetRef1.current) {
         observer1.unobserve(targetRef1.current);
@@ -53,7 +65,7 @@ export default function ResponsiveDrawer() {
   }, [isVisible1, isVisible2]);
 
   const [isDrawOpen, setDrawOpen] = React.useState(false);
-  const menuList = ['Home', 'Experience', 'LeetCode', 'About Me'];
+  const menuList = ['Home', 'Experience', 'LeetCode'];
   const toggleDrawer = (newOpen) => () => {
     setDrawOpen(newOpen);
   };
@@ -66,13 +78,18 @@ export default function ResponsiveDrawer() {
         paddingTop={5}
         >
       <List>
-        {menuList.map((text) => (
-          <ListItem key={text} >
-            <ListItemButton>
+        {menuList.map((text) => {
+          let scrollTo = null;
+          if(text === 'Home') scrollTo = scrollToTop;
+          else if(text === 'Experience') scrollTo = scrollToExperience;
+          else scrollTo = scrollToLeetCode;
+
+          return (<ListItem key={text} >
+            <ListItemButton onClick={scrollTo}>
               <Typography variant='h5'>{text}</Typography>
             </ListItemButton>
           </ListItem>
-        ))}
+        )})}
       </List>
       
     </Box>
@@ -80,7 +97,7 @@ export default function ResponsiveDrawer() {
 
   return (
     <Box>
-        <TimeLine isVisible1={isVisible1} isVisible2={isVisible2} leetcodeRef={leetcodeRef}/>
+        <TimeLine isVisible1={isVisible1} isVisible2={isVisible2} scrollToTop={scrollToTop} scrollToExperience={scrollToExperience} scrollToLeetCode={scrollToLeetCode} />
         <CssBaseline />
         <Box sx={{position:'fixed',  
               background:'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,150,214,1) 0%, rgba(28,126,190,0.6418942577030813) 15%, rgba(0,212,255,0.6502976190476191) 90%);', 
@@ -94,9 +111,14 @@ export default function ResponsiveDrawer() {
                 <GridItem xs={7} width="100%" sx={{display:{xs:'none', sm:'none', md:'none', lg:'block'}}}>
                   <Box marginRight={2}>
                   <Breadcrumbs separator="" display="grid" justifyContent="end">
-                    {menuList.map(m => {
-                      return  <Link underline="hover" color="inherit" href="/" key={m}>
-                                <Typography variant='h4'> {m} </Typography>
+                    {menuList.map(text => {
+                      let scrollTo = null;
+                      if(text === 'Home') scrollTo = scrollToTop;
+                      else if(text === 'Experience') scrollTo = scrollToExperience;
+                      else scrollTo = scrollToLeetCode;
+
+                      return  <Link underline="hover" color="inherit" onClick={scrollTo} key={text} >
+                                <Typography variant='h4'> {text} </Typography>
                               </Link>
                     }) }
                     </Breadcrumbs>
@@ -117,7 +139,7 @@ export default function ResponsiveDrawer() {
             <Box></Box>
           </GridItem>
           <GridItem>
-            <Content triggerScroll={targetRef1} triggerScroll2={targetRef2} leetcodeRef={leetcodeRef}/>
+            <Content triggerScroll={targetRef1} triggerScroll2={targetRef2} leetcodeRef={leetcodeRef} experienceRef={experienceRef}/>
           </GridItem>
         </Grid>
         

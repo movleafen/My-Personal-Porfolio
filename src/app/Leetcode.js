@@ -15,7 +15,7 @@ function fetcher(url) {
 export default function LeetCodeStats() {
     const [data_f, setData] = useState(null)
     const [isLoading_f, setLoading] = useState(true);
-    const url = 'https://leetcodeapi-v1.vercel.app/movleafen111';
+    const url = 'https://leetcode-api-faisalshohag.vercel.app/movleafen111';
     const {data, error, isLoading} = useSWR(url, fetcher);
     
     useEffect(() => {
@@ -25,14 +25,17 @@ export default function LeetCodeStats() {
         }
       }, [isLoading])
     let stats = null;
+    
     if(!isLoading_f){
+        
         stats = { 
-            all:data_f.movleafen111.submitStatsGlobal.acSubmissionNum[0],
-            easy:data_f.movleafen111.submitStatsGlobal.acSubmissionNum[1],
-            medium:data_f.movleafen111.submitStatsGlobal.acSubmissionNum[2],
-            hard:data_f.movleafen111.submitStatsGlobal.acSubmissionNum[3]
+            all:data_f.matchedUserStats.acSubmissionNum[0],
+            easy:data_f.matchedUserStats.acSubmissionNum[1],
+            medium:data_f.matchedUserStats.acSubmissionNum[2],
+            hard:data_f.matchedUserStats.acSubmissionNum[3]
         };
     }
+    
     
     let StatsComponent = isLoading_f ? <Box padding={5}> <CircularProgress /> </Box> : <>
         <Box sx={{ display:'grid', justifyContent: 'center' }}>
@@ -41,9 +44,11 @@ export default function LeetCodeStats() {
                         series={[
                             {
                               data: [
+                                
                                 { id: 0, value: stats.easy.count, label: 'Easy'},
                                 { id: 1, value: stats.medium.count, label: 'Medium'},
                                 { id: 2, value: stats.hard.count, label: 'Hard'},
+                                
                               ],
                             },
                           ]}
@@ -55,7 +60,7 @@ export default function LeetCodeStats() {
         
     </>
            
-
+    
     return StatsComponent;
 }
 

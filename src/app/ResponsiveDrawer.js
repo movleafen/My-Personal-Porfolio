@@ -17,8 +17,8 @@ import TimeLine from './TimeLine';
 export default function ResponsiveDrawer() {
   const [isVisible1, setIsVisible1] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
-  const targetRef1 = useRef();
-  const targetRef2 = useRef();
+  const targetRef1 = useRef(null);
+  const targetRef2 = useRef(null);
   const leetcodeRef = useRef(null);
   const experienceRef = useRef(null);
   
